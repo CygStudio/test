@@ -14,7 +14,13 @@ export default function ChipAnimation() {
   const [svgOpacity, setSvgOpacity] = useState(0)
   const [textBgOpacity, setTextBgOpacity] = useState(1)
   const [chipOpacity, setChipOpacity] = useState(1)
-  const [chipSize, setChipSize] = useState(500)
+  const [chipSize, setChipSize] = useState(() => {
+    // 避免 SSR/CSR 不一致,使用安全的初始值
+    if (typeof window !== 'undefined') {
+      return 500 + window.innerWidth * 20 * 0
+    }
+    return 500
+  })
   const [isTransparent, setIsTransparent] = useState(false)
 
   const { scrollYProgress } = useScroll({

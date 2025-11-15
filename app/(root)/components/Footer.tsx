@@ -1,6 +1,15 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+
 export default function Footer() {
-  const now = new Date()
-  const year = now.getFullYear()
+  // 使用 useState + useEffect 避免 hydration mismatch
+  const [year, setYear] = useState(2025)
+
+  useEffect(() => {
+    setYear(new Date().getFullYear())
+  }, [])
+
   return (
     <footer className="relative text-center w-full bg-[#BBFBD0] mb-6">
       <p className="">
